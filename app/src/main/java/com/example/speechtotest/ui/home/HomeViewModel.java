@@ -37,7 +37,7 @@ public class HomeViewModel extends BaseViewModel {
     private BaseActivity activity;
 
 
-    HomeViewModel(@NonNull Application application) {
+    public HomeViewModel(@NonNull Application application) {
         super(application);
         dictionaryWordRepository = new DictionaryWordRepository(application);
         keyWords = dictionaryWordRepository.getDictionaryWords();
@@ -154,4 +154,20 @@ public class HomeViewModel extends BaseViewModel {
         dictionaryWordRepository.resetActiveWords(false);
     }
 
+
+    /**
+     * test helper function to save data
+     * @param words
+     */
+    public void testSaveData(List<DictionaryWord> words){
+        this.saveData(words);
+    }
+
+    /**
+     * test helper function to get key words
+     * @return
+     */
+    public List<DictionaryWord> testGetKeyWords() {
+        return keyWords.getValue();
+    }
 }
