@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="horizontal_width">16dp</dimen>
+    <dimen name="vertical_width">16dp</dimen>
+    <dimen name="vertical_list_width">8dp</dimen>
+</resources>

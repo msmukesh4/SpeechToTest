@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SpeechToTest</string>
+
+    <string name="speech_to_text_error">Your Device Don\'t Support Speech Input</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="speak">Speak</string>
+    <string name="speak_instruction">Tap on mic icon to speak</string>
+    <string name="btn_continue">Continue</string>
+    <string name="spoken_text_label">You Spoke</string>
+    <string name="record_updated">Record Updated</string>
+    <string name="record_404">Record not found</string>
+
+</resources>

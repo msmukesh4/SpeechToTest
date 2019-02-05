@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/vertical_width"
+    android:paddingLeft="@dimen/horizontal_width"
+    android:paddingRight="@dimen/horizontal_width"
+    android:paddingTop="@dimen/vertical_width">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/NormalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/speak_instruction"
+        android:textStyle="bold" />
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:visibility="invisible"
+        layout="@layout/spoken_layout"/>
+
+    <ImageView
+        android:id="@+id/speak_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:onClick="getUserSpeech"
+        android:src="@drawable/ic_mic" />
+
+</RelativeLayout>
+
+

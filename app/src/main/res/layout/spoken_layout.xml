@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/rl_spoke_layout">
+
+    <TextView
+        android:id="@+id/spoken_text_label"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="@string/spoken_text_label" />
+
+    <TextView
+        android:id="@+id/text"
+        style="@style/NormalBoldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spoken_text_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/vertical_width" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/vertical_width"
+        android:text="@string/btn_continue" />
+
+</RelativeLayout>
