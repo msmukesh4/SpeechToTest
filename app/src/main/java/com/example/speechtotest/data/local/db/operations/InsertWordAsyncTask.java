@@ -1,4 +1,4 @@
-package com.example.speechtotest.data.local.db;
+package com.example.speechtotest.data.local.db.operations;
 
 import android.os.AsyncTask;
 

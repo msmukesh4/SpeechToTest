@@ -22,6 +22,7 @@ import com.example.speechtotest.data.model.DictionaryWord;
 public abstract class SpeechToTextDatabase extends RoomDatabase {
 
     private static SpeechToTextDatabase INSTANCE;
+
     private static final String TAG = SpeechToTextDatabase.class.getSimpleName();
 
     public static SpeechToTextDatabase getInstance(final Context context){
@@ -31,7 +32,7 @@ public abstract class SpeechToTextDatabase extends RoomDatabase {
 
                     // Create DB here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SpeechToTextDatabase.class,"speech_to_text_db")
+                            SpeechToTextDatabase.class,"speech_to_text.db")
                             .addCallback(roomDBCallback)
                             .build();
 

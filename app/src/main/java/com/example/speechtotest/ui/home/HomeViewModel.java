@@ -2,15 +2,12 @@ package com.example.speechtotest.ui.home;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.speechtotest.R;
-import com.example.speechtotest.data.api.APIClient;
-import com.example.speechtotest.data.api.response.DictionaryAPIResponse;
-import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.remote.APIClient;
+import com.example.speechtotest.data.remote.response.DictionaryAPIResponse;
 import com.example.speechtotest.data.local.repositories.DictionaryWordRepository;
 import com.example.speechtotest.data.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;

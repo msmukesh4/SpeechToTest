@@ -23,11 +23,20 @@ public interface DictionaryWordDAO {
     @Query("Delete From dictionary_words")
     void deleteAll();
 
+    @Query("Delete From dictionary_words WHERE word = :word")
+    void delete(String word);
+
     @Query("Select * From dictionary_words Order by frequency DESC")
-    LiveData<List<DictionaryWord>> getAllDictionaryWords();
+    List<DictionaryWord> getAllDictionaryWords();
+
+    @Query("Select * From dictionary_words WHERE word = :word")
+    DictionaryWord getDictionaryWord(String word);
 
     @Update
     void update(DictionaryWord word);
+
+    @Query("UPDATE dictionary_words SET is_active = :isActive WHERE word = :word")
+    void active(boolean isActive, String word);
 
     @Query("UPDATE dictionary_words SET is_active = :isActive, frequency = :frequency WHERE word = :word")
     void update(boolean isActive, int frequency, String word);

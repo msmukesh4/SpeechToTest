@@ -4,10 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
 import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
-import com.example.speechtotest.data.local.db.InsertWordAsyncTask;
+import com.example.speechtotest.data.local.db.operations.InsertWordAsyncTask;
 import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
-import com.example.speechtotest.data.local.db.ResetActiveWordAsyncTask;
-import com.example.speechtotest.data.local.db.UpdateWordAsyncTask;
+import com.example.speechtotest.data.local.db.operations.ResetActiveWordAsyncTask;
+import com.example.speechtotest.data.local.db.operations.UpdateWordAsyncTask;
 import com.example.speechtotest.data.model.DictionaryWord;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class DictionaryWordRepository {
     public DictionaryWordRepository(Application application) {
         SpeechToTextDatabase db = SpeechToTextDatabase.getInstance(application);
         this.dictionaryWordDAO = db.dictionaryWordDAO();
-        this.dictionaryWords = this.dictionaryWordDAO.getAllDictionaryWords();
+//        this.dictionaryWords = this.dictionaryWordDAO.getAllDictionaryWords();
     }
 
     public LiveData<List<DictionaryWord>> getDictionaryWords() {

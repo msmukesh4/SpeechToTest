@@ -6,7 +6,7 @@ import com.example.speechtotest.data.model.DictionaryWord;
 
 import java.util.List;
 
-public interface WordDataSource {
+public interface WordsDataSource {
 
     interface LoadWordsCallback {
 
@@ -25,7 +25,7 @@ public interface WordDataSource {
 
     void getWords(@NonNull LoadWordsCallback callback);
 
-    void getWord(@NonNull GetWordCallback callback);
+    void getWord(@NonNull String word, @NonNull GetWordCallback callback);
 
     void saveWord(@NonNull DictionaryWord dictionaryWord);
 
@@ -33,7 +33,7 @@ public interface WordDataSource {
 
     void activateWord(@NonNull String word);
 
-    void resetAllWords(@NonNull LoadWordsCallback callback);
+    void resetAllWords();
 
     void refreshWords();
 

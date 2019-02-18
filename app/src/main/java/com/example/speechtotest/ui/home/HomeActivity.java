@@ -5,30 +5,20 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.speechtotest.R;
-import com.example.speechtotest.data.api.APIClient;
-import com.example.speechtotest.data.api.response.DictionaryAPIResponse;
 import com.example.speechtotest.data.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.speech.SpeechActivity;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by mukesh on 30/01/19

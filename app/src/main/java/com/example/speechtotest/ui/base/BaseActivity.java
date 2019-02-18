@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import com.example.speechtotest.ui.base.listeners.ActivityListeners;
 
+import dagger.android.AndroidInjection;
+import dagger.android.HasActivityInjector;
+import dagger.android.HasFragmentInjector;
+
 /**
  * Created by mukesh on 30/01/19
  *
@@ -23,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
     }
 
