@@ -2,10 +2,13 @@ package com.example.speechtotest.ui.home;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.speechtotest.R;
+import com.example.speechtotest.data.WordsDataSource;
+import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.data.remote.APIClient;
 import com.example.speechtotest.data.remote.response.DictionaryAPIResponse;
 import com.example.speechtotest.data.local.repositories.DictionaryWordRepository;
@@ -14,6 +17,8 @@ import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.base.BaseViewModel;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,18 +31,21 @@ import retrofit2.Response;
 public class HomeViewModel extends BaseViewModel {
 
     // live data variable for registering change in data
-    private LiveData<List<DictionaryWord>> keyWords;
+    private MutableLiveData<List<DictionaryWord>> keyWords = new MutableLiveData<>();
 
     // this repository has the access all the data of dictionary words
     private DictionaryWordRepository dictionaryWordRepository;
+    private WordsRepository wordsRepository;
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private BaseActivity activity;
 
 
-    public HomeViewModel(@NonNull Application application) {
+    @Inject
+    public HomeViewModel(@NonNull Application application, WordsRepository wordsRepository) {
         super(application);
-        dictionaryWordRepository = new DictionaryWordRepository(application);
-        keyWords = dictionaryWordRepository.getDictionaryWords();
+        this.wordsRepository = wordsRepository;
+//        dictionaryWordRepository = new DictionaryWordRepository(application);
+//        keyWords = dictionaryWordRepository.getDictionaryWords();
         fetchAndSaveData();
     }
 
@@ -50,35 +58,50 @@ public class HomeViewModel extends BaseViewModel {
      * method to fetch dictionary data from the server
      * and take action to save the data in local DB
      */
-    private void fetchAndSaveData() {
-        APIClient.getAPIService(APIClient.LOG_REQ_RES_BODY_HEADERS)
-                .getDictionaryData().enqueue(new Callback<DictionaryAPIResponse>() {
+    private void fetchAndSaveData(){
+        this.wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
             @Override
-            public void onResponse(Call<DictionaryAPIResponse> call, Response<DictionaryAPIResponse> response) {
-                if (response.isSuccessful()) {
-                    List<DictionaryWord> words = response.body().getDictionaryWord();
-                    Log.e(TAG, "onResponse: " + words.toString());
-
-                    if (words != null && words.size() > 0) {
-                        saveData(words);
-                        resetActiveWords();
-                    }
-
-                } else {
-                    Log.e(TAG, "Error while fetching dictionary data: " + response.code());
-//                    Toast.makeText(getApplicationContext(), R.string.something_went_wrong, Toast.LENGTH_LONG).show();
-                    activity.showToast(R.string.something_went_wrong);
-                }
+            public void onWordsLoaded(List<DictionaryWord> wordList) {
+                if (wordList != null)
+                    keyWords.setValue(wordList);
             }
 
             @Override
-            public void onFailure(Call<DictionaryAPIResponse> call, Throwable t) {
-                Log.e(TAG, "Error while fetching dictionary data: " + t.getMessage());
-//                Toast.makeText(getApplicationContext(), R.string.something_went_wrong, Toast.LENGTH_LONG).show();
+            public void onDataNotAvailable() {
+                Log.e(TAG, "Error while fetching dictionary data: ");
                 activity.showToast(R.string.something_went_wrong);
             }
         });
     }
+//    private void fetchAndSaveData() {
+//        APIClient.getAPIService(APIClient.LOG_REQ_RES_BODY_HEADERS)
+//                .getDictionaryData().enqueue(new Callback<DictionaryAPIResponse>() {
+//            @Override
+//            public void onResponse(Call<DictionaryAPIResponse> call, Response<DictionaryAPIResponse> response) {
+//                if (response.isSuccessful()) {
+//                    List<DictionaryWord> words = response.body().getDictionaryWord();
+//                    Log.e(TAG, "onResponse: " + words.toString());
+//
+//                    if (words != null && words.size() > 0) {
+//                        saveData(words);
+//                        resetActiveWords();
+//                    }
+//
+//                } else {
+//                    Log.e(TAG, "Error while fetching dictionary data: " + response.code());
+////                    Toast.makeText(getApplicationContext(), R.string.something_went_wrong, Toast.LENGTH_LONG).show();
+//                    activity.showToast(R.string.something_went_wrong);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DictionaryAPIResponse> call, Throwable t) {
+//                Log.e(TAG, "Error while fetching dictionary data: " + t.getMessage());
+////                Toast.makeText(getApplicationContext(), R.string.something_went_wrong, Toast.LENGTH_LONG).show();
+//                activity.showToast(R.string.something_went_wrong);
+//            }
+//        });
+//    }
 
     /**
      * find the DictionaryWord with the :keyWord and
@@ -94,22 +117,39 @@ public class HomeViewModel extends BaseViewModel {
 
         this.resetActiveWords();
 
-        if (this.keyWords.getValue() != null) {
-            for (int i = 0; i < this.keyWords.getValue().size(); i++) {
-                if (keyWords.getValue().get(i).getWord().equalsIgnoreCase(keyWord)) {
-                    DictionaryWord dictionaryWord = keyWords.getValue().get(i);
-                    dictionaryWord.incrementFrequency();
-                    dictionaryWord.setActive(true);
-                    this.update(dictionaryWord);
-                    activity.showError(R.string.record_updated);
-                    recordFound = true;
-                }
+        this.wordsRepository.activateWord(keyWord);
+
+        this.wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
+            @Override
+            public void onWordsLoaded(List<DictionaryWord> wordList) {
+                if (wordList != null)
+                    keyWords.setValue(wordList);
             }
 
-            if (!recordFound){
-                activity.showToast(R.string.record_404);
+            @Override
+            public void onDataNotAvailable() {
+                Log.e(TAG, "Error while fetching dictionary data: ");
+                activity.showToast(R.string.something_went_wrong);
             }
-        }
+        });
+
+//
+//        if (this.keyWords.getValue() != null) {
+//            for (int i = 0; i < this.keyWords.getValue().size(); i++) {
+//                if (keyWords.getValue().get(i).getWord().equalsIgnoreCase(keyWord)) {
+//                    DictionaryWord dictionaryWord = keyWords.getValue().get(i);
+//                    dictionaryWord.incrementFrequency();
+//                    dictionaryWord.setActive(true);
+//                    this.update(dictionaryWord);
+//                    activity.showError(R.string.record_updated);
+//                    recordFound = true;
+//                }
+//            }
+//
+//            if (!recordFound){
+//                activity.showToast(R.string.record_404);
+//            }
+//        }
     }
 
     /**
@@ -148,7 +188,7 @@ public class HomeViewModel extends BaseViewModel {
      * from GREY --> GREEN
      */
     private void resetActiveWords(){
-        dictionaryWordRepository.resetActiveWords(false);
+        wordsRepository.resetAllWords();
     }
 
 

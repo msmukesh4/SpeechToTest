@@ -1,20 +1,13 @@
 package com.example.speechtotest;
 
-import android.app.Activity;
-import android.app.Application;
-
-import com.example.speechtotest.di.AppInjector;
-import com.example.speechtotest.ui.base.BaseActivity;
-
-import javax.inject.Inject;
+import com.example.speechtotest.di.component.ApplicationComponent;
+import com.example.speechtotest.di.module.ApplicationModule;
 
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
 
-public class SpeechToTextApplication extends DaggerApplication implements HasActivityInjector {
+public class SpeechToTextApplication extends DaggerApplication {
 
 //    @Inject
 //    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
@@ -22,13 +15,16 @@ public class SpeechToTextApplication extends DaggerApplication implements HasAct
     @Override
     public void onCreate() {
         super.onCreate();
-        AppInjector.init(this);
-//        AndroidInjection.inject(this);
     }
 
     @Override
-    protected AndroidInjector<SpeechToTextApplication> applicationInjector() {
-        return null;
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        ApplicationComponent component = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+        component.inject(this);
+
+        return component;
     }
 
 

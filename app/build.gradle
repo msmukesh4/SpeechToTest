@@ -51,7 +51,7 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
     // Dagger
     implementation "com.google.dagger:dagger:$rootProject.dagger_version"
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
+//    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
