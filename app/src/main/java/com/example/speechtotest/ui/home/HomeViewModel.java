@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.speechtotest.R;
+import com.example.speechtotest.SpeechToTextApplication;
 import com.example.speechtotest.data.WordsDataSource;
 import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.data.remote.APIClient;
@@ -35,23 +36,27 @@ public class HomeViewModel extends BaseViewModel {
 
     // this repository has the access all the data of dictionary words
     private DictionaryWordRepository dictionaryWordRepository;
-    private WordsRepository wordsRepository;
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private BaseActivity activity;
 
+    private WordsRepository wordsRepository;
 
-    @Inject
-    public HomeViewModel(@NonNull Application application, WordsRepository wordsRepository) {
+    public HomeViewModel(@NonNull Application application) {
         super(application);
-        this.wordsRepository = wordsRepository;
+
+//        this.wordsRepository = wordsRepository;
 //        dictionaryWordRepository = new DictionaryWordRepository(application);
 //        keyWords = dictionaryWordRepository.getDictionaryWords();
-        fetchAndSaveData();
+//        fetchAndSaveData();
+
+        wordsRepository = SpeechToTextApplication.getApplicationComponent().getWordsRepository();
+
     }
 
     @Override
     protected void setUp(BaseActivity activity) {
         this.activity = activity;
+        fetchAndSaveData();
     }
 
     /**
@@ -59,7 +64,7 @@ public class HomeViewModel extends BaseViewModel {
      * and take action to save the data in local DB
      */
     private void fetchAndSaveData(){
-        this.wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
+        wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
             @Override
             public void onWordsLoaded(List<DictionaryWord> wordList) {
                 if (wordList != null)

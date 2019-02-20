@@ -8,6 +8,8 @@ import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.data.local.WordsLocalDataSource;
 import com.example.speechtotest.util.AppExecutors;
 
+import javax.inject.Inject;
+
 /**
  * Created by mukesh on 04/02/19
  *
@@ -16,12 +18,8 @@ import com.example.speechtotest.util.AppExecutors;
  */
 public abstract class BaseViewModel extends AndroidViewModel {
 
-    protected WordsRepository wordsRepository;
-
     protected BaseViewModel(@NonNull Application application){
         super(application);
-//        WordsLocalDataSource localDataSource = WordsLocalDataSource.newInstance()
-//        wordsRepository = WordsRepository.getInstance()
     }
 
     /**

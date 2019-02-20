@@ -12,6 +12,8 @@ import com.example.speechtotest.util.AppExecutors;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,28 +21,28 @@ import retrofit2.Response;
 public class WordsRemoteDataSource implements WordsDataSource {
 
     private static final String TAG = WordsRemoteDataSource.class.getSimpleName();
-    private volatile static WordsRemoteDataSource INSTANCE;
+//    private volatile static WordsRemoteDataSource INSTANCE;
     private final APIService apiService;
-
     private final AppExecutors appExecutors;
 
-    private WordsRemoteDataSource(@NonNull AppExecutors appExecutors){
+    @Inject
+    public WordsRemoteDataSource(@NonNull APIService apiService, @NonNull AppExecutors appExecutors){
         this.appExecutors = appExecutors;
-        this.apiService = APIClient.getAPIService(APIClient.LOG_REQ_RES_BODY_HEADERS);
+        this.apiService = apiService;
     }
 
-    public static WordsRemoteDataSource newInstance(@NonNull AppExecutors appExecutors){
-
-        if (INSTANCE == null){
-            synchronized (WordsRemoteDataSource.class){
-                if (INSTANCE == null){
-                    INSTANCE = new WordsRemoteDataSource(appExecutors);
-                }
-            }
-        }
-
-        return INSTANCE;
-    }
+//    public static WordsRemoteDataSource newInstance(@NonNull AppExecutors appExecutors){
+//
+//        if (INSTANCE == null){
+//            synchronized (WordsRemoteDataSource.class){
+//                if (INSTANCE == null){
+//                    INSTANCE = new WordsRemoteDataSource(appExecutors);
+//                }
+//            }
+//        }
+//
+//        return INSTANCE;
+//    }
 
     /**
      * Note: {@link LoadWordsCallback#onDataNotAvailable()} is never fired. In a real remote data

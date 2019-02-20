@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+
 /**
  * Global executor pools for the whole application.
  * <p>
@@ -29,8 +31,9 @@ public class AppExecutors {
         this.mainThread = mainThread;
     }
 
-    public AppExecutors() {
-        this(new DiskIOThreadExecutor(), Executors.newFixedThreadPool(THREAD_COUNT),
+    @Inject
+    public AppExecutors(DiskIOThreadExecutor diskIOThreadExecutor) {
+        this(diskIOThreadExecutor, Executors.newFixedThreadPool(THREAD_COUNT),
                 new MainThreadExecutor());
     }
 

@@ -2,12 +2,16 @@ package com.example.speechtotest.data;
 
 import android.support.annotation.NonNull;
 
+import com.example.speechtotest.data.local.WordsLocalDataSource;
 import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.remote.WordsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import static com.example.speechtotest.util.Common.checkNotNull;
 
@@ -23,7 +27,7 @@ import static com.example.speechtotest.util.Common.checkNotNull;
  */
 public class WordsRepository implements WordsDataSource {
 
-    private volatile static WordsRepository INSTANCE = null;
+//    private volatile static WordsRepository INSTANCE = null;
 
     private final WordsDataSource mWordsRemoteDataSource;
 
@@ -44,7 +48,8 @@ public class WordsRepository implements WordsDataSource {
      * @param mWordsRemoteDataSource
      * @param mWordsLocalDataSource
      */
-    private WordsRepository(@NonNull WordsDataSource mWordsRemoteDataSource, @NonNull WordsDataSource mWordsLocalDataSource) {
+    @Inject
+    public WordsRepository(@NonNull WordsRemoteDataSource mWordsRemoteDataSource, @NonNull WordsLocalDataSource mWordsLocalDataSource) {
         this.mWordsRemoteDataSource = checkNotNull(mWordsRemoteDataSource);
         this.mWordsLocalDataSource = checkNotNull(mWordsLocalDataSource);
     }
@@ -56,27 +61,27 @@ public class WordsRepository implements WordsDataSource {
      * @param mWordsLocalDataSource
      * @return the {@Link WordsRepository} instance
      */
-    public static WordsRepository getInstance(WordsDataSource mWordsRemoteDataSource, WordsDataSource mWordsLocalDataSource){
+//    public static WordsRepository getInstance(WordsDataSource mWordsRemoteDataSource, WordsDataSource mWordsLocalDataSource){
+//
+//        if (INSTANCE == null){
+//            synchronized (WordsRepository.class){
+//                if (INSTANCE == null){
+//                    INSTANCE = new WordsRepository(mWordsRemoteDataSource, mWordsLocalDataSource);
+//                }
+//            }
+//        }
+//
+//        return INSTANCE;
+//    }
 
-        if (INSTANCE == null){
-            synchronized (WordsRepository.class){
-                if (INSTANCE == null){
-                    INSTANCE = new WordsRepository(mWordsRemoteDataSource, mWordsLocalDataSource);
-                }
-            }
-        }
 
-        return INSTANCE;
-    }
-
-
-    /**
-     * Used to force {@link #getInstance(WordsDataSource, WordsDataSource)} to create a new instance
-     * next time it's called.
-     */
-    public static void destroyInstance(){
-        INSTANCE = null;
-    }
+//    /**
+//     * Used to force {@link #getInstance(WordsDataSource, WordsDataSource)} to create a new instance
+//     * next time it's called.
+//     */
+//    public static void destroyInstance(){
+//        INSTANCE = null;
+//    }
 
 
     /**

@@ -26,7 +26,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Di
 
     public DictionaryAdapter(Context context){
         this.context = context;
-        words = new ArrayList<DictionaryWord>();
+        words = new ArrayList<>();
     }
 
     @NonNull

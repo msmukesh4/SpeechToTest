@@ -4,38 +4,41 @@ import android.support.annotation.NonNull;
 
 import com.example.speechtotest.data.WordsDataSource;
 import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
 import com.example.speechtotest.data.model.DictionaryWord;
 import com.example.speechtotest.util.AppExecutors;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static com.example.speechtotest.util.Common.checkNotNull;
 
 public class WordsLocalDataSource implements WordsDataSource {
 
-    private volatile static WordsLocalDataSource INSTANCE;
+//    private volatile static WordsLocalDataSource INSTANCE;
 
     private DictionaryWordDAO dictionaryWordDAO;
 
     private AppExecutors appExecutors;
 
-    // Making {@link WordsLocalDataSource} singleton
-    private WordsLocalDataSource(@NonNull AppExecutors appExecutors, @NonNull DictionaryWordDAO dictionaryWordDAO){
+    @Inject
+    public WordsLocalDataSource(@NonNull AppExecutors appExecutors, @NonNull SpeechToTextDatabase speechToTextDatabase){
         this.appExecutors = appExecutors;
-        this.dictionaryWordDAO = dictionaryWordDAO;
+        this.dictionaryWordDAO = speechToTextDatabase.dictionaryWordDAO();
     }
 
-    public static WordsLocalDataSource newInstance(@NonNull AppExecutors appExecutors,
-                                                   @NonNull DictionaryWordDAO dictionaryWordDAO){
-        if (INSTANCE == null){
-            synchronized (WordsLocalDataSource.class){
-                if (INSTANCE == null){
-                    INSTANCE = new WordsLocalDataSource(appExecutors, dictionaryWordDAO);
-                }
-            }
-        }
-        return INSTANCE;
-    }
+//    public static WordsLocalDataSource newInstance(@NonNull AppExecutors appExecutors,
+//                                                   @NonNull DictionaryWordDAO dictionaryWordDAO){
+//        if (INSTANCE == null){
+//            synchronized (WordsLocalDataSource.class){
+//                if (INSTANCE == null){
+//                    INSTANCE = new WordsLocalDataSource(appExecutors, dictionaryWordDAO);
+//                }
+//            }
+//        }
+//        return INSTANCE;
+//    }
 
     /**
      * Note: {@link LoadWordsCallback#onDataNotAvailable()} is fired if the database doesn't exist
