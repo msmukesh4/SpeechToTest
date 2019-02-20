@@ -14,11 +14,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.speechtotest.R;
+import com.example.speechtotest.SpeechToTextApplication;
+import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.data.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.speech.SpeechActivity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by mukesh on 30/01/19
@@ -52,6 +56,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void setUp() {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+
         homeViewModel.setUp(this);
 
         dictionaryAdapter = new DictionaryAdapter(this);

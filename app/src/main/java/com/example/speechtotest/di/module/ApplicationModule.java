@@ -39,7 +39,4 @@ public class ApplicationModule {
     APIService provideAPIService(){
         return APIClient.getAPIService(APIClient.LOG_REQ_RES_BODY_HEADERS);
     }
-
-
-
 }

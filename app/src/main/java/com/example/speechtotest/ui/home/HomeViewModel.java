@@ -39,22 +39,19 @@ public class HomeViewModel extends BaseViewModel {
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private BaseActivity activity;
 
-    private WordsRepository wordsRepository;
+    @Inject
+    WordsRepository wordsRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
 
-//        this.wordsRepository = wordsRepository;
-//        dictionaryWordRepository = new DictionaryWordRepository(application);
-//        keyWords = dictionaryWordRepository.getDictionaryWords();
-//        fetchAndSaveData();
-
-        wordsRepository = SpeechToTextApplication.getApplicationComponent().getWordsRepository();
+        SpeechToTextApplication.getApplicationComponent().inject(this);
 
     }
 
     @Override
     protected void setUp(BaseActivity activity) {
+        Log.e(TAG, "setUp::wordsRepository: "+wordsRepository );
         this.activity = activity;
         fetchAndSaveData();
     }
@@ -158,6 +155,7 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     /**
+     * @Unused
      * this method is used to call
      * repository method to save data
      * @param words : words to be saved
@@ -176,6 +174,7 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     /**
+     * @Unused
      * update a dictionary word
      * @param word
      */
@@ -183,6 +182,12 @@ public class HomeViewModel extends BaseViewModel {
         dictionaryWordRepository.updateDictionaryWord(word);
     }
 
+    /**
+     * @UnUsed
+     * @param isActive
+     * @param frequency
+     * @param word
+     */
     private void update(boolean isActive, int frequency, String word){
         dictionaryWordRepository.updateDictionaryWord(isActive, frequency, word);
     }
