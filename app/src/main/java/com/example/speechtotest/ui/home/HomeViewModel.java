@@ -119,21 +119,32 @@ public class HomeViewModel extends BaseViewModel {
 
         this.resetActiveWords();
 
-        this.wordsRepository.activateWord(keyWord);
-
-        this.wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
+        wordsRepository.getWord(keyWord, new WordsDataSource.GetWordCallback() {
             @Override
-            public void onWordsLoaded(List<DictionaryWord> wordList) {
-                if (wordList != null)
-                    keyWords.setValue(wordList);
+            public void onWordLoaded(DictionaryWord dictionaryWord) {
+                wordsRepository.activateWord(keyWord);
+
+                wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
+                    @Override
+                    public void onWordsLoaded(List<DictionaryWord> wordList) {
+                        if (wordList != null)
+                            keyWords.setValue(wordList);
+                    }
+
+                    @Override
+                    public void onDataNotAvailable() {
+                        Log.e(TAG, "Error while fetching dictionary data: ");
+                        activity.showToast(R.string.something_went_wrong);
+                    }
+                });
             }
 
             @Override
             public void onDataNotAvailable() {
-                Log.e(TAG, "Error while fetching dictionary data: ");
-                activity.showToast(R.string.something_went_wrong);
+                activity.showToast(R.string.record_404);
             }
         });
+
 
 //
 //        if (this.keyWords.getValue() != null) {

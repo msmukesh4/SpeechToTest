@@ -99,7 +99,7 @@ public class WordsRemoteDataSource implements WordsDataSource {
 
     @Override
     public void getWord(@NonNull String word, @NonNull GetWordCallback callback) {
-
+        callback.onDataNotAvailable();
     }
 
 

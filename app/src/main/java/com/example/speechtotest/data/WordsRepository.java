@@ -152,7 +152,7 @@ public class WordsRepository implements WordsDataSource {
                 if (mCachedwords == null){
                     mCachedwords = new LinkedHashMap<>();
                 }
-                mCachedwords.put(dictionaryWord.getWord(), dictionaryWord);
+                mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
 
                 callback.onWordLoaded(dictionaryWord);
             }
@@ -171,7 +171,7 @@ public class WordsRepository implements WordsDataSource {
                         if (mCachedwords == null){
                             mCachedwords = new LinkedHashMap<>();
                         }
-                        mCachedwords.put(dictionaryWord.getWord(), dictionaryWord);
+                        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
 
                         callback.onWordLoaded(dictionaryWord);
                     }
@@ -196,7 +196,7 @@ public class WordsRepository implements WordsDataSource {
         if (mCachedwords == null){
             mCachedwords = new LinkedHashMap<>();
         }
-        mCachedwords.put(dictionaryWord.getWord(), dictionaryWord);
+        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
     }
 
     @Override
@@ -206,13 +206,13 @@ public class WordsRepository implements WordsDataSource {
         DictionaryWord activeWord = new DictionaryWord(dictionaryWord.getWord(), dictionaryWord.getFrequency(), true);
         activeWord.incrementFrequency();
 
-        mWordsRemoteDataSource.activateWord(dictionaryWord);
-        mWordsLocalDataSource.activateWord(dictionaryWord);
+        mWordsRemoteDataSource.activateWord(activeWord);
+        mWordsLocalDataSource.activateWord(activeWord);
 
         if (mCachedwords == null){
             mCachedwords = new LinkedHashMap<>();
         }
-        mCachedwords.put(dictionaryWord.getWord(), activeWord);
+        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), activeWord);
     }
 
     @Override
@@ -234,7 +234,7 @@ public class WordsRepository implements WordsDataSource {
         for (DictionaryWord word : mCachedwords.values()) {
             if (word.isActive()) {
                 word.setActive(false);
-                mCachedwords.put(word.getWord(), word);
+                mCachedwords.put(word.getWord().toLowerCase(), word);
             }
         }
     }
@@ -285,7 +285,7 @@ public class WordsRepository implements WordsDataSource {
         }
         mCachedwords.clear();
         for (DictionaryWord word: dictionaryWords) {
-            mCachedwords.put(word.getWord(), word);
+            mCachedwords.put(word.getWord().toLowerCase(), word);
         }
 
         mCacheIsDirty = false;
@@ -302,7 +302,7 @@ public class WordsRepository implements WordsDataSource {
         checkNotNull(word);
 
         if (mCachedwords != null && !mCachedwords.isEmpty()){
-            return mCachedwords.get(word);
+            return mCachedwords.get(word.toLowerCase());
         } else {
             return null;
         }
