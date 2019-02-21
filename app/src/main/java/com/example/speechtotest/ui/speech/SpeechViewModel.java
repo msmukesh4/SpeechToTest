@@ -3,6 +3,7 @@ package com.example.speechtotest.ui.speech;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.base.BaseViewModel;
 import com.example.speechtotest.util.StringUtils;
@@ -14,8 +15,12 @@ public class SpeechViewModel extends BaseViewModel {
 
     private BaseActivity activity;
 
-    protected SpeechViewModel(@NonNull Application application) {
+    private WordsRepository wordsRepository;
+
+    public SpeechViewModel(Application application, WordsRepository wordsRepository) {
         super(application);
+
+        this.wordsRepository = wordsRepository;
     }
 
     @Override

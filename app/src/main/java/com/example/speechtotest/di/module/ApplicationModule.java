@@ -6,7 +6,6 @@ import android.content.Context;
 import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
 import com.example.speechtotest.data.remote.APIClient;
 import com.example.speechtotest.data.remote.APIService;
-import com.example.speechtotest.util.AppExecutors;
 
 import dagger.Module;
 import dagger.Provides;

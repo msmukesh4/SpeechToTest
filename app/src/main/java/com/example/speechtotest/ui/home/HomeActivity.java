@@ -1,6 +1,7 @@
 package com.example.speechtotest.ui.home;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.example.speechtotest.data.WordsRepository;
 import com.example.speechtotest.data.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.speech.SpeechActivity;
+import com.example.speechtotest.util.ViewModelFactory;
 
 import java.util.List;
 
@@ -55,7 +57,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void setUp() {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+
+        homeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
 
         homeViewModel.setUp(this);
 

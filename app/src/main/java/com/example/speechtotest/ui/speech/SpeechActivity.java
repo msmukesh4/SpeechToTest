@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.speechtotest.R;
 import com.example.speechtotest.ui.base.BaseActivity;
+import com.example.speechtotest.util.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -51,7 +52,8 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void setUp() {
-        speechViewModel = ViewModelProviders.of(this).get(SpeechViewModel.class);
+        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+        speechViewModel = ViewModelProviders.of(this, factory).get(SpeechViewModel.class);
     }
 
 

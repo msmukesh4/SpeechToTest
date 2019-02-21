@@ -34,18 +34,24 @@ public class HomeViewModel extends BaseViewModel {
     // live data variable for registering change in data
     private MutableLiveData<List<DictionaryWord>> keyWords = new MutableLiveData<>();
 
+    // @UnUsed
     // this repository has the access all the data of dictionary words
     private DictionaryWordRepository dictionaryWordRepository;
+
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private BaseActivity activity;
 
-    @Inject
-    WordsRepository wordsRepository;
+    private WordsRepository wordsRepository;
 
-    public HomeViewModel(@NonNull Application application) {
+
+    /**
+     *  SpeechToTextApplication.getApplicationComponent().inject(this);
+     *  not needed anymore as wordsRepository is injected from ViewModelFactory
+     */
+    public HomeViewModel(@NonNull Application application, WordsRepository wordsRepository) {
         super(application);
 
-        SpeechToTextApplication.getApplicationComponent().inject(this);
+        this.wordsRepository = wordsRepository;
 
     }
 
@@ -115,7 +121,6 @@ public class HomeViewModel extends BaseViewModel {
      * @param keyWord : search key word
      */
     protected void checkSpeechText(String keyWord) {
-        boolean recordFound = false;
         Log.d(TAG, "checkSpeechText: " + keyWord);
 
         this.resetActiveWords();
@@ -145,25 +150,6 @@ public class HomeViewModel extends BaseViewModel {
                 activity.showToast(R.string.record_404);
             }
         });
-
-
-//
-//        if (this.keyWords.getValue() != null) {
-//            for (int i = 0; i < this.keyWords.getValue().size(); i++) {
-//                if (keyWords.getValue().get(i).getWord().equalsIgnoreCase(keyWord)) {
-//                    DictionaryWord dictionaryWord = keyWords.getValue().get(i);
-//                    dictionaryWord.incrementFrequency();
-//                    dictionaryWord.setActive(true);
-//                    this.update(dictionaryWord);
-//                    activity.showError(R.string.record_updated);
-//                    recordFound = true;
-//                }
-//            }
-//
-//            if (!recordFound){
-//                activity.showToast(R.string.record_404);
-//            }
-//        }
     }
 
     /**
