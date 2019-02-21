@@ -51,49 +51,29 @@ public class WordsRemoteDataSource implements WordsDataSource {
      */
     @Override
     public void getWords(@NonNull final LoadWordsCallback callback) {
-        Runnable runnable = new Runnable() {
+        Runnable runnable = () -> apiService.getDictionaryData().enqueue(new Callback<DictionaryAPIResponse>() {
             @Override
-            public void run() {
-                apiService.getDictionaryData().enqueue(new Callback<DictionaryAPIResponse>() {
-                    @Override
-                    public void onResponse(Call<DictionaryAPIResponse> call, Response<DictionaryAPIResponse> response) {
-                        if (response.isSuccessful()) {
-                            final List<DictionaryWord> words = response.body().getDictionaryWord();
-                            Log.e(TAG, "onResponse: " + words.toString());
+            public void onResponse(Call<DictionaryAPIResponse> call, Response<DictionaryAPIResponse> response) {
+                if (response.isSuccessful()) {
+                    final List<DictionaryWord> words = response.body().getDictionaryWord();
+                    Log.e(TAG, "onResponse: " + words.toString());
 
-                            if (words != null && words.size() > 0) {
-                                appExecutors.mainThread().execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        callback.onWordsLoaded(words);
-                                    }
-                                });
-                            }
-
-                        } else {
-                            Log.e(TAG, "Error while fetching dictionary data: " + response.code());
-                            appExecutors.mainThread().execute(new Runnable() {
-                                @Override
-                                public void run() {
-                                    callback.onDataNotAvailable();
-                                }
-                            });
-                        }
+                    if (words != null && words.size() > 0) {
+                        appExecutors.mainThread().execute(() -> callback.onWordsLoaded(words));
                     }
 
-                    @Override
-                    public void onFailure(Call<DictionaryAPIResponse> call, Throwable t) {
-                        Log.e(TAG, "Error while fetching dictionary data: " + t.getMessage());
-                        appExecutors.mainThread().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                callback.onDataNotAvailable();
-                            }
-                        });
-                    }
-                });
+                } else {
+                    Log.e(TAG, "Error while fetching dictionary data: " + response.code());
+                    appExecutors.mainThread().execute(() -> callback.onDataNotAvailable());
+                }
             }
-        };
+
+            @Override
+            public void onFailure(Call<DictionaryAPIResponse> call, Throwable t) {
+                Log.e(TAG, "Error while fetching dictionary data: " + t.getMessage());
+                appExecutors.mainThread().execute(() -> callback.onDataNotAvailable());
+            }
+        });
         appExecutors.networkIO().execute(runnable);
     }
 

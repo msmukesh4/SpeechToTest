@@ -46,21 +46,15 @@ public class WordsLocalDataSource implements WordsDataSource {
      */
     @Override
     public void getWords(@NonNull final LoadWordsCallback callback) {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                final List<DictionaryWord> dictionaryWords = dictionaryWordDAO.getAllDictionaryWords();
-                appExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (dictionaryWords.isEmpty()){
-                            callback.onDataNotAvailable();
-                        } else {
-                            callback.onWordsLoaded(dictionaryWords);
-                        }
-                    }
-                });
-            }
+        Runnable runnable = () -> {
+            final List<DictionaryWord> dictionaryWords = dictionaryWordDAO.getAllDictionaryWords();
+            appExecutors.mainThread().execute(() -> {
+                if (dictionaryWords.isEmpty()){
+                    callback.onDataNotAvailable();
+                } else {
+                    callback.onWordsLoaded(dictionaryWords);
+                }
+            });
         };
 
         appExecutors.diskIO().execute(runnable);
@@ -68,21 +62,18 @@ public class WordsLocalDataSource implements WordsDataSource {
 
     @Override
     public void getWord(@NonNull final String word, @NonNull final GetWordCallback callback) {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                final DictionaryWord dictionaryWord = dictionaryWordDAO.getDictionaryWord(word);
-                appExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (dictionaryWord == null){
-                            callback.onDataNotAvailable();
-                        } else {
-                           callback.onWordLoaded(dictionaryWord);
-                        }
+        Runnable runnable = () -> {
+            final DictionaryWord dictionaryWord = dictionaryWordDAO.getDictionaryWord(word);
+            appExecutors.mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    if (dictionaryWord == null){
+                        callback.onDataNotAvailable();
+                    } else {
+                       callback.onWordLoaded(dictionaryWord);
                     }
-                });
-            }
+                }
+            });
         };
         appExecutors.diskIO().execute(runnable);
     }
@@ -91,12 +82,7 @@ public class WordsLocalDataSource implements WordsDataSource {
     @Override
     public void saveWord(@NonNull final DictionaryWord dictionaryWord) {
         checkNotNull(dictionaryWord);
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.insert(dictionaryWord);
-            }
-        };
+        Runnable runnable = () -> dictionaryWordDAO.insert(dictionaryWord);
         appExecutors.diskIO().execute(runnable);
     }
 
@@ -105,12 +91,7 @@ public class WordsLocalDataSource implements WordsDataSource {
     @Override
     public void activateWord(@NonNull final String word) {
         checkNotNull(word);
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.active(true, word);
-            }
-        };
+        final Runnable runnable = () -> dictionaryWordDAO.active(true, word);
         appExecutors.diskIO().execute(runnable);
     }
 
@@ -118,23 +99,13 @@ public class WordsLocalDataSource implements WordsDataSource {
     @Override
     public void activateWord(@NonNull final DictionaryWord dictionaryWord) {
         checkNotNull(dictionaryWord);
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.update(dictionaryWord);
-            }
-        };
+        final Runnable runnable = () -> dictionaryWordDAO.update(dictionaryWord);
         appExecutors.diskIO().execute(runnable);
     }
 
     @Override
     public void resetAllWords() {
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.resetActiveWords(false, true);
-            }
-        };
+        final Runnable runnable = () -> dictionaryWordDAO.resetActiveWords(false, true);
         appExecutors.diskIO().execute(runnable);
     }
 
@@ -146,24 +117,14 @@ public class WordsLocalDataSource implements WordsDataSource {
 
     @Override
     public void deleteAllWords() {
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.deleteAll();
-            }
-        };
+        final Runnable runnable = () -> dictionaryWordDAO.deleteAll();
         appExecutors.diskIO().execute(runnable);
     }
 
     @Override
     public void deleteWord(@NonNull final DictionaryWord dictionaryWord) {
         checkNotNull(dictionaryWord);
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                dictionaryWordDAO.delete(dictionaryWord.getWord());
-            }
-        };
+        final Runnable runnable = () -> dictionaryWordDAO.delete(dictionaryWord.getWord());
         appExecutors.diskIO().execute(runnable);
     }
 }
