@@ -26,6 +26,7 @@ public abstract class SpeechToTextDatabase extends RoomDatabase {
     private static final String TAG = SpeechToTextDatabase.class.getSimpleName();
 
     public static SpeechToTextDatabase getInstance(final Context context){
+        Log.e(TAG, "getInstance:");
         if (INSTANCE == null){
             synchronized (SpeechToTextDatabase.class){
                 if (INSTANCE == null){

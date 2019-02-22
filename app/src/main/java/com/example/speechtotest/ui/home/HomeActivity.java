@@ -40,6 +40,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private DictionaryAdapter dictionaryAdapter;
     private HomeViewModel homeViewModel;
 
+    @Inject
+    ViewModelProvider.NewInstanceFactory factory;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         // register onClickListener
         speak.setOnClickListener(this);
 
+        ((SpeechToTextApplication) getApplication())
+                .getApplicationComponent().inject(this);
+
         // setUp the activity
         setUp();
     }
@@ -58,7 +64,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void setUp() {
         // Use a Factory to inject dependencies into the ViewModel
-        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+//        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
 
         homeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
 

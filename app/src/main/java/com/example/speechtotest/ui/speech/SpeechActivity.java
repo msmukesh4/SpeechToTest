@@ -1,6 +1,7 @@
 package com.example.speechtotest.ui.speech;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.content.Intent;
@@ -13,11 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.speechtotest.R;
+import com.example.speechtotest.SpeechToTextApplication;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.util.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 /**
  * Created by mukesh on 30/01/19
@@ -30,6 +34,9 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
     private static final int SPEECH_REQUEST_CODE = 100;
     private SpeechViewModel speechViewModel;
     private RelativeLayout rlSpokeLayout;
+
+    @Inject
+    ViewModelProvider.NewInstanceFactory factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,9 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
         btnContinue = findViewById(R.id.btn_continue);
         btnContinue.setOnClickListener(this);
 
+        ((SpeechToTextApplication) getApplication())
+                .getApplicationComponent().inject(this);
+
         // setUp the activity
         setUp();
 
@@ -52,7 +62,7 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void setUp() {
-        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
+//        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
         speechViewModel = ViewModelProviders.of(this, factory).get(SpeechViewModel.class);
     }
 

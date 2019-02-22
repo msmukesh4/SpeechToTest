@@ -12,7 +12,7 @@ import dagger.android.DaggerApplication;
 
 public class SpeechToTextApplication extends Application {
 
-    static ApplicationComponent applicationComponent;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -24,7 +24,7 @@ public class SpeechToTextApplication extends Application {
 
     }
 
-    public static ApplicationComponent getApplicationComponent() {
+    public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
     }
 }

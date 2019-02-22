@@ -21,30 +21,34 @@ import javax.inject.Singleton;
  */
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    @SuppressLint("StaticFieldLeak")
-    private static volatile ViewModelFactory INSTANCE;
+//    @SuppressLint("StaticFieldLeak")
+//    private static volatile ViewModelFactory INSTANCE;
 
-    @Inject
-    WordsRepository wordsRepository;
+//    @Inject
+    private WordsRepository wordsRepository;
 
     private final Application application;
 
-    public static ViewModelFactory getInstance(Application application) {
+//    public static ViewModelFactory getInstance(Application application) {
+//
+//        if (INSTANCE == null) {
+//            synchronized (ViewModelFactory.class) {
+//                if (INSTANCE == null) {
+//                    INSTANCE = new ViewModelFactory(application);
+//                }
+//            }
+//        }
+//        return INSTANCE;
+//    }
 
-        if (INSTANCE == null) {
-            synchronized (ViewModelFactory.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new ViewModelFactory(application);
-                }
-            }
-        }
-        return INSTANCE;
-    }
 
-    public ViewModelFactory(Application application){
+
+    public ViewModelFactory(Application application, WordsRepository wordsRepository){
         this.application = application;
+        this.wordsRepository = wordsRepository;
+//        ((SpeechToTextApplication) application).getApplicationComponent().inject(this);
 
-        SpeechToTextApplication.getApplicationComponent().inject(this);
+
     }
 
     @Override

@@ -7,6 +7,7 @@ package com.example.speechtotest.util;
  */
 public class Common {
 
+
     /**
      * Ensures that an object reference passed as a parameter to the calling method is not null.
      *
