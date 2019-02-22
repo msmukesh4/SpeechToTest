@@ -12,7 +12,7 @@ import dagger.Provides;
 /**
  * Created by mukesh on 22/02/19
  *
- * The class is declared as abstract because all the methods in that class are static
+ * The @Module is declared as abstract because all the methods in this class are static
  * and Dagger will never be creating object of this class.
  * This will also prevent the class constructor from marked as deprecated from dagger
  *
