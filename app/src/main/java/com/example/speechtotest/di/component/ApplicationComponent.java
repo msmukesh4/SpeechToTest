@@ -11,8 +11,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 /**
- * Dagger2 tutorial
- * {@Link https://www.youtube.com/watch?v=ZZ_qek0hGkM&list=PLrnPJCHvNZuA2ioi4soDZKz8euUQnJW65}
+ * Dagger2 basic tutorial
+ * <a href="https://www.youtube.com/watch?v=ZZ_qek0hGkM&list=PLrnPJCHvNZuA2ioi4soDZKz8euUQnJW65">tutorial</a>
  */
 @Singleton
 @Component(modules = { ApplicationModule.class })
