@@ -12,11 +12,15 @@ import dagger.Provides;
 /**
  * Created by mukesh on 22/02/19
  *
+ * The class is declared as abstract because all the methods in that class are static
+ * and Dagger will never be creating object of this class.
+ * This will also prevent the class constructor from marked as deprecated from dagger
+ *
  * TODO initialize the LogLevel and BaseAPI url {@link APIClient} by taking information from build config rather than {@link Constants}
  */
 
 @Module
-public class NetworkModule {
+public abstract class NetworkModule {
 
     @Singleton
     @Provides
