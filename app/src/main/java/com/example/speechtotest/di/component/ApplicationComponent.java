@@ -10,6 +10,10 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+/**
+ * Dagger2 tutorial
+ * {@Link https://www.youtube.com/watch?v=ZZ_qek0hGkM&list=PLrnPJCHvNZuA2ioi4soDZKz8euUQnJW65}
+ */
 @Singleton
 @Component(modules = { ApplicationModule.class })
 public interface ApplicationComponent {
