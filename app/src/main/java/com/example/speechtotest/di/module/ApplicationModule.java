@@ -18,7 +18,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module(includes = { NetworkModule.class })
 public class ApplicationModule {
 
     private Application application;
@@ -41,12 +41,6 @@ public class ApplicationModule {
     @Provides
     SpeechToTextDatabase provideSpeechToTextDatabase(Context context){
         return SpeechToTextDatabase.getInstance(context);
-    }
-
-    @Singleton
-    @Provides
-    APIService provideAPIService(){
-        return APIClient.getAPIService(APIClient.LOG_REQ_RES_BODY_HEADERS);
     }
 
     /**
