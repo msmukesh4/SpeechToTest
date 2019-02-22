@@ -47,7 +47,7 @@ public class WordsRepository implements WordsDataSource {
      * @param mWordsLocalDataSource
      */
 //    @Inject
-    public WordsRepository(@NonNull WordsRemoteDataSource mWordsRemoteDataSource, @NonNull WordsLocalDataSource mWordsLocalDataSource) {
+    public WordsRepository(@NonNull WordsDataSource mWordsRemoteDataSource, @NonNull WordsDataSource mWordsLocalDataSource) {
         this.mWordsRemoteDataSource = checkNotNull(mWordsRemoteDataSource);
         this.mWordsLocalDataSource = checkNotNull(mWordsLocalDataSource);
     }
