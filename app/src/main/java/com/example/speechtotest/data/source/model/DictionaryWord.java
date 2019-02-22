@@ -1,14 +1,11 @@
-package com.example.speechtotest.data.model;
+package com.example.speechtotest.data.source.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.example.speechtotest.R;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 
 /**
  * Created by mukesh on 30/01/19

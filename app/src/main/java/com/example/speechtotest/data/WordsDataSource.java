@@ -2,7 +2,7 @@ package com.example.speechtotest.data;
 
 import android.support.annotation.NonNull;
 
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 
 import java.util.List;
 

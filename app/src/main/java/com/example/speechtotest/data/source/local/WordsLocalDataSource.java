@@ -1,11 +1,11 @@
-package com.example.speechtotest.data.local;
+package com.example.speechtotest.data.source.local;
 
 import android.support.annotation.NonNull;
 
 import com.example.speechtotest.data.WordsDataSource;
-import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
-import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.source.local.db.SpeechToTextDatabase;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 import com.example.speechtotest.util.AppExecutors;
 
 import java.util.List;

@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.speechtotest.R;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 
 import java.util.ArrayList;
 import java.util.List;

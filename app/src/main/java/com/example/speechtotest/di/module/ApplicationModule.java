@@ -5,11 +5,11 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 
 import com.example.speechtotest.data.WordsRepository;
-import com.example.speechtotest.data.local.WordsLocalDataSource;
-import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
-import com.example.speechtotest.data.remote.APIClient;
-import com.example.speechtotest.data.remote.APIService;
-import com.example.speechtotest.data.remote.WordsRemoteDataSource;
+import com.example.speechtotest.data.source.local.WordsLocalDataSource;
+import com.example.speechtotest.data.source.local.db.SpeechToTextDatabase;
+import com.example.speechtotest.data.source.remote.APIClient;
+import com.example.speechtotest.data.source.remote.APIService;
+import com.example.speechtotest.data.source.remote.WordsRemoteDataSource;
 import com.example.speechtotest.util.ViewModelFactory;
 
 import javax.inject.Singleton;

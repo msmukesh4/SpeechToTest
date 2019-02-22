@@ -1,13 +1,11 @@
-package com.example.speechtotest.data.remote;
+package com.example.speechtotest.data.source.remote;
 
 import android.support.annotation.NonNull;
-import android.telephony.euicc.EuiccInfo;
 import android.util.Log;
 
-import com.example.speechtotest.R;
 import com.example.speechtotest.data.WordsDataSource;
-import com.example.speechtotest.data.model.DictionaryWord;
-import com.example.speechtotest.data.remote.response.DictionaryAPIResponse;
+import com.example.speechtotest.data.source.model.DictionaryWord;
+import com.example.speechtotest.data.source.remote.response.DictionaryAPIResponse;
 import com.example.speechtotest.util.AppExecutors;
 
 import java.util.List;

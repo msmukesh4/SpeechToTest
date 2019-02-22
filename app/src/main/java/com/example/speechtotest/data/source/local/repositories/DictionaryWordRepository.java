@@ -1,14 +1,14 @@
-package com.example.speechtotest.data.local.repositories;
+package com.example.speechtotest.data.source.local.repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
-import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
-import com.example.speechtotest.data.local.db.operations.InsertWordAsyncTask;
-import com.example.speechtotest.data.local.db.SpeechToTextDatabase;
-import com.example.speechtotest.data.local.db.operations.ResetActiveWordAsyncTask;
-import com.example.speechtotest.data.local.db.operations.UpdateWordAsyncTask;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.source.local.db.operations.InsertWordAsyncTask;
+import com.example.speechtotest.data.source.local.db.SpeechToTextDatabase;
+import com.example.speechtotest.data.source.local.db.operations.ResetActiveWordAsyncTask;
+import com.example.speechtotest.data.source.local.db.operations.UpdateWordAsyncTask;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 
 import java.util.List;
 

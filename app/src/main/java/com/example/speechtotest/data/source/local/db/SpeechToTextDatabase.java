@@ -1,18 +1,15 @@
-package com.example.speechtotest.data.local.db;
+package com.example.speechtotest.data.source.local.db;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 
 /**
  * Created by mukesh on 04/02/19

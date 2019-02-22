@@ -7,23 +7,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.speechtotest.R;
-import com.example.speechtotest.SpeechToTextApplication;
 import com.example.speechtotest.data.WordsDataSource;
 import com.example.speechtotest.data.WordsRepository;
-import com.example.speechtotest.data.remote.APIClient;
-import com.example.speechtotest.data.remote.response.DictionaryAPIResponse;
-import com.example.speechtotest.data.local.repositories.DictionaryWordRepository;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.local.repositories.DictionaryWordRepository;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.base.BaseViewModel;
 
 import java.util.List;
-
-import javax.inject.Inject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by mukesh on 04/02/19

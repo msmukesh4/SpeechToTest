@@ -2,16 +2,14 @@ package com.example.speechtotest.data;
 
 import android.support.annotation.NonNull;
 
-import com.example.speechtotest.data.local.WordsLocalDataSource;
-import com.example.speechtotest.data.model.DictionaryWord;
-import com.example.speechtotest.data.remote.WordsRemoteDataSource;
+import com.example.speechtotest.data.source.local.WordsLocalDataSource;
+import com.example.speechtotest.data.source.model.DictionaryWord;
+import com.example.speechtotest.data.source.remote.WordsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
 
 import static com.example.speechtotest.util.Common.checkNotNull;
 

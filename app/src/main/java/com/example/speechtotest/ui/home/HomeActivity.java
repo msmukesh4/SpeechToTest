@@ -16,11 +16,9 @@ import android.widget.Button;
 
 import com.example.speechtotest.R;
 import com.example.speechtotest.SpeechToTextApplication;
-import com.example.speechtotest.data.WordsRepository;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 import com.example.speechtotest.ui.base.BaseActivity;
 import com.example.speechtotest.ui.speech.SpeechActivity;
-import com.example.speechtotest.util.ViewModelFactory;
 
 import java.util.List;
 

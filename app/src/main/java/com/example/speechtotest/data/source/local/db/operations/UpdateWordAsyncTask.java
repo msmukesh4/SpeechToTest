@@ -1,9 +1,9 @@
-package com.example.speechtotest.data.local.db.operations;
+package com.example.speechtotest.data.source.local.db.operations;
 
 import android.os.AsyncTask;
 
-import com.example.speechtotest.data.local.dao.DictionaryWordDAO;
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.local.dao.DictionaryWordDAO;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 
 /**
  * Created by mukesh on 04/02/19

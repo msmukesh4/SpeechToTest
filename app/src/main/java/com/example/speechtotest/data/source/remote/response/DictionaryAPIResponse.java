@@ -1,6 +1,6 @@
-package com.example.speechtotest.data.remote.response;
+package com.example.speechtotest.data.source.remote.response;
 
-import com.example.speechtotest.data.model.DictionaryWord;
+import com.example.speechtotest.data.source.model.DictionaryWord;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

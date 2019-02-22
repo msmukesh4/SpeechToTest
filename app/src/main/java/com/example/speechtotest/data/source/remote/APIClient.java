@@ -1,4 +1,4 @@
-package com.example.speechtotest.data.remote;
+package com.example.speechtotest.data.source.remote;
 
 import com.example.speechtotest.util.Constants;
 
