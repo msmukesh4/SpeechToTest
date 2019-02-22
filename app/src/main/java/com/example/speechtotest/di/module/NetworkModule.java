@@ -12,8 +12,8 @@ import dagger.Provides;
 /**
  * Created by mukesh on 22/02/19
  *
- * The @Module is declared as abstract because all the methods in this class are static
- * and Dagger will never be creating object of this class.
+ * This Module is declared as abstract because all the methods in this class are static
+ * and Dagger will never be creating object of this class.gst
  * This will also prevent the class constructor from marked as deprecated from dagger
  *
  * TODO initialize the LogLevel and BaseAPI url {@link APIClient} by taking information from build config rather than {@link Constants}
