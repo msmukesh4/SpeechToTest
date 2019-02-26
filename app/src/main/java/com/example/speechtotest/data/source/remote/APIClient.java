@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by mukesh on 30/01/19
  */
 public class APIClient {
-    private static Retrofit retrofit = null;
+    private static volatile Retrofit retrofit = null;
     public static int LOG_NOT_NEEDED = 0;
     public static int LOG_REQ_RES = 1;
     public static int LOG_REQ_RES_BODY_HEADERS = 2;

@@ -9,11 +9,51 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        /**
+         * If you need to insert variables into your AndroidManifest.xml file
+         * that are defined in your build.gradle file, you can do so with the manifestPlaceholders property.
+         * This property takes a map of key-value pairs
+         *
+         * If you want to access this variable in AndroidManifest.xml
+         * <intent-filter ... >
+         *     <data android:scheme="http" android:host="${hostName}" ... />
+         *     ...
+         * </intent-filter>
+         */
+//        manifestPlaceholders = [hostName:"www.example.com"]
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            initWith debug
+            debuggable true
+        }
+
+        stage {
+            initWith debug
+        }
+    }
+
+    // Specifies one flavor dimension.
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // This property is optional if you are using only one dimension.
+            dimension "version"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+        }
+
+        full {
+            dimension "version"
+            applicationIdSuffix ".full"
+            versionNameSuffix "-full"
         }
     }
     dataBinding {
