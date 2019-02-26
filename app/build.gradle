@@ -23,6 +23,16 @@ android {
          */
 //        manifestPlaceholders = [hostName:"www.example.com"]
     }
+
+    signingConfigs {
+        release {
+            storeFile file("/Users/mukesh/AndroidKeyStore")
+            storePassword "password"
+            keyAlias "speechtotext-keystore"
+            keyPassword "password"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
