@@ -33,6 +33,11 @@ android {
         }
     }
 
+    /**
+     * For build variants detail check out this link
+     * <p>
+     * <a href="https://developer.android.com/studio/build/build-variants">build variants</a>
+     */
     buildTypes {
         release {
             minifyEnabled false
