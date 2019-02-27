@@ -1,5 +1,6 @@
 package com.example.speechtotest.data.source.remote;
 
+import com.example.speechtotest.BuildConfig;
 import com.example.speechtotest.util.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -42,7 +43,7 @@ public class APIClient {
 
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
+                    .baseUrl(BuildConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();

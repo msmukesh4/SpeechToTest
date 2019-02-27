@@ -35,17 +35,24 @@ android {
 
     /**
      * For build variants detail check out this link
-     * <p>
      * <a href="https://developer.android.com/studio/build/build-variants">build variants</a>
+     *
+     * <p>
+     * To make use of buildConfigField ::
+     * Clean the Project and then
+     * Rebuild the project
+     * to verify the 'BASE_URL' populated properly goto APIClient and check the 'BuildConfig.java' file
      */
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"http://a.galactio.com/interview/\""
         }
 
         debug {
             initWith debug
+            buildConfigField "String", "BASE_URL", "\"http://a.galactio.com/interview/\""
             debuggable true
         }
 
