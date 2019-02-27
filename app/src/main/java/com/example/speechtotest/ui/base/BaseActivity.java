@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.speechtotest.ui.base.listeners.ActivityListeners;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import dagger.android.AndroidInjection;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasFragmentInjector;
@@ -25,9 +27,10 @@ import dagger.android.HasFragmentInjector;
  */
 public abstract class BaseActivity extends AppCompatActivity implements ActivityListeners {
 
+    private AtomicBoolean isRunningTest;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -85,6 +88,26 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     @Override
     public void showError(@StringRes int msg) {
         showError(getString(msg));
+    }
+
+    /**
+     * helper function to check if espresso test is running
+     * @return
+     */
+    public synchronized boolean isRunningTest () {
+        if (null == isRunningTest) {
+            boolean istest;
+
+            try {
+                Class.forName ("android.support.test.espresso.Espresso");
+                istest = true;
+            } catch (ClassNotFoundException e) {
+                istest = false;
+            }
+
+            isRunningTest = new AtomicBoolean (istest);
+        }
+        return isRunningTest.get();
     }
 
     /**

@@ -8,6 +8,12 @@
     android:paddingTop="@dimen/vertical_width"
     android:paddingBottom="@dimen/vertical_width">
 
+    <TextView
+        android:id="@+id/flavourType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="main"/>
+
     <Button
         android:id="@+id/btn_speak"
         android:layout_width="wrap_content"
