@@ -2,6 +2,7 @@ package com.example.speechtotest.ui.home;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
@@ -87,6 +88,24 @@ public class HomeActivityTest {
      */
     @Test
     public void test3GetMockSpeechText(){
+
+        onView(withId(R.id.btn_speak)).perform(click());
+
+        // check speechActivity launch
+        Activity speechActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, WAIT_PERIOD);
+        assertNotNull(speechActivity);
+
+        // make sure the speech activity is launched by view assertion
+        onView(allOf(withId(R.id.header), withText(R.string.speak_instruction))).check(matches(isDisplayed()));
+
+        // pass result from speechActivity to homeActivity
+        Intent intent = new Intent();
+        intent.putExtra(SpeechActivity.SPEECH_DATA_KEY, "test");
+        speechActivity.setResult(Activity.RESULT_OK, intent);
+        speechActivity.finish();
+
+        // check if the correct result is received in homeActivity
+        // ...
 
     }
 

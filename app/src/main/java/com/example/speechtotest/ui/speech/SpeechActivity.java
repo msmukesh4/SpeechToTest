@@ -31,7 +31,8 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
     private static final String TAG = SpeechActivity.class.getSimpleName();
     private TextView text;
     private Button btnContinue;
-    private static final int SPEECH_REQUEST_CODE = 100;
+    public static final int SPEECH_REQUEST_CODE = 200;
+    public static final String SPEECH_DATA_KEY = "speech";
     private SpeechViewModel speechViewModel;
     private RelativeLayout rlSpokeLayout;
 
@@ -120,7 +121,7 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
                 // returning data to parent activity
                 Intent intent = new Intent();
                 if (text.getText().length() > 0) {
-                    intent.putExtra("speech", text.getText().toString());
+                    intent.putExtra(SPEECH_DATA_KEY, text.getText().toString());
                     setResult(Activity.RESULT_OK, intent);
                 } else
                     setResult(Activity.RESULT_CANCELED);

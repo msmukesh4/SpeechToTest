@@ -31,7 +31,6 @@ import javax.inject.Inject;
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
-    public static final int SPEECH_REQUEST_CODE = 200;
     private RecyclerView dictionaryRecyclerView;
     private Button speak;
     private List<DictionaryWord> keyWords;
@@ -106,7 +105,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         switch (view.getId()){
             case R.id.btn_speak:
                 startActivityForResult(new Intent(this,
-                        SpeechActivity.class), SPEECH_REQUEST_CODE);
+                        SpeechActivity.class), SpeechActivity.SPEECH_REQUEST_CODE);
         }
     }
 
@@ -121,9 +120,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode){
-            case SPEECH_REQUEST_CODE:
-                if (resultCode == RESULT_OK && data != null){
-                    this.homeViewModel.checkSpeechText(data.getStringExtra("speech"));
+            case SpeechActivity.SPEECH_REQUEST_CODE:
+                if (resultCode == RESULT_OK && data != null) {
+                    this.homeViewModel.checkSpeechText(data.getStringExtra(SpeechActivity.SPEECH_DATA_KEY));
                 }
                 break;
         }
