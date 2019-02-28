@@ -21,8 +21,8 @@ import javax.inject.Singleton;
  */
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-//    @SuppressLint("StaticFieldLeak")
-//    private static volatile ViewModelFactory INSTANCE;
+    @SuppressLint("StaticFieldLeak")
+    private static volatile ViewModelFactory INSTANCE;
 
 //    @Inject
     private WordsRepository wordsRepository;

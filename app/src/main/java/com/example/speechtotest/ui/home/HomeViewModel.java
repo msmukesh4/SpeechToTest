@@ -124,8 +124,10 @@ public class HomeViewModel extends BaseViewModel {
                 wordsRepository.getWords(new WordsDataSource.LoadWordsCallback() {
                     @Override
                     public void onWordsLoaded(List<DictionaryWord> wordList) {
-                        if (wordList != null)
+                        if (wordList != null) {
                             keyWords.setValue(wordList);
+                            activity.showToast(R.string.record_updated);
+                        }
                     }
 
                     @Override
