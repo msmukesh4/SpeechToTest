@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.example.speechtotest.R;
 import com.example.speechtotest.ui.speech.SpeechActivity;
-import com.example.speechtotest.ui.splash.SplashActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -162,9 +161,6 @@ public class HomeActivityTest {
         onView(withText(R.string.record_updated)).inRoot(withDecorView(not(is(homeActivity.getWindow()
                 .getDecorView())))).check(matches(isDisplayed()));
 
-//        // check if negative toast is displayed
-//        onView(allOf(withId(homeActivity.getWindow().getDecorView().getRootView().getId()), withText(R.string.record_updated)))
-//                .check(matches(isDisplayed()));
 
     }
 
