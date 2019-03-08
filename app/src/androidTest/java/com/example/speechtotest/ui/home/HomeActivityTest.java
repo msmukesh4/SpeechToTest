@@ -35,6 +35,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.core.internal.deps.guava.base.Preconditions.checkArgument;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
@@ -187,7 +188,7 @@ public class HomeActivityTest {
          * so that Espresso can read the toast message
          */
         try {
-            Thread.sleep(7000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -224,6 +225,9 @@ public class HomeActivityTest {
         // check if the dictionary word is displayed with the increased frequency
         onView(withItemText(DICTIONARY_WORD)).check(matches(isDisplayed()));
         onView(withItemText(String.valueOf(helloCount))).check(matches(isDisplayed()));
+
+        // Verify previous frequency is not displayed
+        onView(withItemText(String.valueOf(20))).check(doesNotExist());
 
     }
 
