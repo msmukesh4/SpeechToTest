@@ -1,4 +1,4 @@
-package com.example.speechtotest.fake_data_source;
+package com.example.speechtotest.data.fake_data_source;
 
 import com.example.speechtotest.data.source.model.DictionaryWord;
 

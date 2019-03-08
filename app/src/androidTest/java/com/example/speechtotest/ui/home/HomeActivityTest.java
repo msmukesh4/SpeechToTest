@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -14,7 +13,7 @@ import android.view.View;
 
 import com.example.speechtotest.R;
 import com.example.speechtotest.data.source.model.DictionaryWord;
-import com.example.speechtotest.fake_data_source.FakeDictionaryWords;
+import com.example.speechtotest.data.fake_data_source.FakeDictionaryWords;
 import com.example.speechtotest.ui.speech.SpeechActivity;
 
 import org.hamcrest.Description;
@@ -33,8 +32,6 @@ import javax.inject.Inject;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.core.internal.deps.guava.base.Preconditions.checkArgument;
