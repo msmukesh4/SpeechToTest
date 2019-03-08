@@ -33,6 +33,8 @@ import javax.inject.Inject;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.core.internal.deps.guava.base.Preconditions.checkArgument;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
@@ -185,7 +187,7 @@ public class HomeActivityTest {
          * so that Espresso can read the toast message
          */
         try {
-            Thread.sleep(2000);
+            Thread.sleep(7000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -282,17 +284,34 @@ public class HomeActivityTest {
 
     private void speakAWord(final Activity speechActivity, final String word){
 
-        // pass result from speechActivity to homeActivity
-        Intent intent = new Intent();
-        intent.putExtra(SpeechActivity.SPEECH_DATA_KEY, word);
-        speechActivity.setResult(Activity.RESULT_OK, intent);
-        speechActivity.finish();
+        speechActivity.runOnUiThread(() -> ((SpeechActivity) speechActivity).refreshText(word));
+
+        /**
+         * this sleep time is needed for the toast message to be displayed
+         * so that Espresso can read the toast message
+         */
+        try {
+            Thread.sleep(WAIT_PERIOD);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.btn_continue)).perform(click());
+
+
+//        // pass result from speechActivity to homeActivity
+//        Intent intent = new Intent();
+//        intent.putExtra(SpeechActivity.SPEECH_DATA_KEY, word);
+//        speechActivity.setResult(Activity.RESULT_OK, intent);
+//        speechActivity.finish();
     }
 
     @After
     public void tearDown() throws Exception {
 
         homeActivity = null;
+        homeViewModel = null;
+        factory = null;
 
     }
 }

@@ -100,15 +100,18 @@ public class SpeechActivity extends BaseActivity implements View.OnClickListener
             case SPEECH_REQUEST_CODE:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    text.setText(speechViewModel.replaceStreetText(result.get(0)));
                     Log.e(TAG, "onActivityResult: "+result.get(0));
-                    rlSpokeLayout.setVisibility(View.VISIBLE);
+                    refreshText(result.get(0));
                 }
                 break;
         }
     }
 
 
+    public void refreshText(String text){
+        this.text.setText(speechViewModel.replaceStreetText(text));
+        rlSpokeLayout.setVisibility(View.VISIBLE);
+    }
 
 
     /**
