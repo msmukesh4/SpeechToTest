@@ -267,7 +267,19 @@ public class WordsRepository implements WordsDataSource {
                 refreshCache(dictionaryWords);
                 refreshLocalDataSource(dictionaryWords);
 
-                callback.onWordsLoaded(new ArrayList<>(mCachedwords.values()));
+                mWordsLocalDataSource.getWords(new LoadWordsCallback() {
+                    @Override
+                    public void onWordsLoaded(List<DictionaryWord> wordList) {
+                        refreshCache(wordList);
+                        callback.onWordsLoaded(wordList);
+                    }
+
+                    @Override
+                    public void onDataNotAvailable() {
+                        // data not available in local so querying the remote data store
+                        getTasksFromRemoteDataSource(callback);
+                    }
+                });
             }
 
             @Override
@@ -306,6 +318,7 @@ public class WordsRepository implements WordsDataSource {
             return null;
         }
     }
+
 
     @VisibleForTesting
     public void saveWords(List<DictionaryWord> dictionaryWords){

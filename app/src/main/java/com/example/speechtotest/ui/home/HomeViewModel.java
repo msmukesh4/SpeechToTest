@@ -52,6 +52,7 @@ public class HomeViewModel extends BaseViewModel {
     protected void setUp(BaseActivity activity) {
         Log.e(TAG, "setUp::wordsRepository: "+wordsRepository );
         this.activity = activity;
+        wordsRepository.refreshWords();
         resetActiveWords();
         fetchAndSaveData();
     }

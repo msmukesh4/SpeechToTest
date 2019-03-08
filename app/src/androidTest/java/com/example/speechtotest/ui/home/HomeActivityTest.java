@@ -195,6 +195,16 @@ public class HomeActivityTest {
 
         FakeDictionaryWords fakeDictionaryWords = new FakeDictionaryWords(word);
 
+        /**
+         * this sleep time is needed for the toast message to be displayed
+         * so that Espresso can read the toast message
+         */
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         homeViewModel.testSaveData(fakeDictionaryWords.getDictionaryWords());
 
         onView(withItemText(DICTIONARY_WORD)).check(matches(isDisplayed()));
