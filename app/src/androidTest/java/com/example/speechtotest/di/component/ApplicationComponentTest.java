@@ -1,5 +1,6 @@
 package com.example.speechtotest.di.component;
 
+import com.example.speechtotest.data.source.local.WordsLocalDataSourceTest;
 import com.example.speechtotest.di.module.ApplicationModule;
 import com.example.speechtotest.ui.home.HomeActivityTest;
 
@@ -19,5 +20,8 @@ public interface ApplicationComponentTest {
 
     // Activities
     void inject(HomeActivityTest homeActivity);
+
+    // Data Source
+    void inject(WordsLocalDataSourceTest wordsLocalDataSourceTest);
 
 }

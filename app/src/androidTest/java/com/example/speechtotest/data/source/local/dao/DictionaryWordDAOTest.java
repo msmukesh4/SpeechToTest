@@ -30,6 +30,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by mukesh on 08/03/19
@@ -216,7 +217,7 @@ public class DictionaryWordDAOTest {
 
     private void assertWordsDeactivated(List<DictionaryWord> loadedTasks) {
         for (DictionaryWord word : loadedTasks) {
-            assertTrue(!word.isActive());
+            assertFalse(word.isActive());
         }
     }
 
