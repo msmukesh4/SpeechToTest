@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.example.speechtotest.R;
@@ -32,6 +33,7 @@ public class HomeViewModel extends BaseViewModel {
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private BaseActivity activity;
 
+    @VisibleForTesting
     private WordsRepository wordsRepository;
 
 
@@ -146,14 +148,14 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     /**
-     * @Unused
+     * @Unused : Used only for testing
      * this method is used to call
      * repository method to save data
      * @param words : words to be saved
      */
     private void saveData(List<DictionaryWord> words) {
         Log.d(TAG, "saveData: inserting words");
-        dictionaryWordRepository.insertAll(words);
+        wordsRepository.saveWords(words);
     }
 
     /**
@@ -197,14 +199,18 @@ public class HomeViewModel extends BaseViewModel {
      * test helper function to save data
      * @param words
      */
+    @VisibleForTesting
     public void testSaveData(List<DictionaryWord> words){
         this.saveData(words);
+        activity.runOnUiThread(() -> keyWords.setValue(words));
+
     }
 
     /**
      * test helper function to get key words
      * @return
      */
+    @VisibleForTesting
     public List<DictionaryWord> testGetKeyWords() {
         return keyWords.getValue();
     }

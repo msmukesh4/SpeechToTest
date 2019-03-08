@@ -1,6 +1,7 @@
 package com.example.speechtotest.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import com.example.speechtotest.data.source.local.WordsLocalDataSource;
 import com.example.speechtotest.data.source.model.DictionaryWord;
@@ -304,6 +305,12 @@ public class WordsRepository implements WordsDataSource {
         } else {
             return null;
         }
+    }
+
+    @VisibleForTesting
+    public void saveWords(List<DictionaryWord> dictionaryWords){
+        refreshCache(dictionaryWords);
+        refreshLocalDataSource(dictionaryWords);
     }
 
 }

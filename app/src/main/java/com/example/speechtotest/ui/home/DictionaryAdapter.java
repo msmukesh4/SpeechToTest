@@ -2,6 +2,7 @@ package com.example.speechtotest.ui.home;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,9 @@ import java.util.List;
  */
 public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.DictionaryViewHolder> {
 
+    @VisibleForTesting
     private List<DictionaryWord> words;
+
     private Context context;
 
     public DictionaryAdapter(Context context){
