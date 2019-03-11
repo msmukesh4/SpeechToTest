@@ -32,7 +32,7 @@
         android:layout_marginBottom="60dp"
         android:gravity="center"
         android:onClick="getUserSpeech"
-        android:src="@drawable/ic_mic" />
+        android:src="@mipmap/ic_mic" />
 
 </RelativeLayout>
 

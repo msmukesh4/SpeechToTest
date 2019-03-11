@@ -10,4 +10,7 @@
     <string name="record_updated">Record Updated</string>
     <string name="record_404">Record not found</string>
 
+    <string name="flavour">main</string>
+    <string name="splash_screen">Splash Screen</string>
+
 </resources>
