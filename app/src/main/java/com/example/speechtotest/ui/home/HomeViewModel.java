@@ -20,6 +20,9 @@ import java.util.List;
 /**
  * Created by mukesh on 04/02/19
  * ViewModel Class of homeActivity
+ *
+ * TODO implement remove the BaseActivity reference from this class as it can leak. Try implementing the error mechanism through {@link MutableLiveData}
+ * TODO after implementing the above todo remove StaticFieldLeak ignore statement from lint.xml file
  */
 public class HomeViewModel extends BaseViewModel {
 
@@ -157,6 +160,7 @@ public class HomeViewModel extends BaseViewModel {
      * repository method to save data
      * @param words : words to be saved
      */
+    @VisibleForTesting
     private void saveData(List<DictionaryWord> words) {
         Log.d(TAG, "saveData: inserting words");
         wordsRepository.saveWords(words);

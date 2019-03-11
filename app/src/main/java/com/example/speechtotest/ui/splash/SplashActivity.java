@@ -36,6 +36,7 @@ public class SplashActivity extends BaseActivity {
        handler.postDelayed(() -> {
            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
            startActivity(intent);
+           finish();
        }, TIMEOUT);
    }
 }

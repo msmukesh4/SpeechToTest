@@ -29,7 +29,11 @@ task clean(type: Delete) {
 ext {
     supportLibrary = '28.0.0'
     roomVersion = '1.1.1'
+
+    // cannot use the latest version of archLifecycleVersion becz the support lib
+    // includes this version if we upgrade this version to 1.1.1 this will create a conflict
     archLifecycleVersion = '1.1.0'
+
     daggerVersion = '2.16'
     retrofitVersion = '2.3.0'
     testRulesVersion = '1.0.2'

@@ -10,6 +10,7 @@ import com.example.speechtotest.data.source.remote.WordsRemoteDataSource;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.example.speechtotest.util.Common.checkNotNull;
@@ -151,7 +152,7 @@ public class WordsRepository implements WordsDataSource {
                 if (mCachedwords == null){
                     mCachedwords = new LinkedHashMap<>();
                 }
-                mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
+                mCachedwords.put(dictionaryWord.getWord().toLowerCase(Locale.getDefault()), dictionaryWord);
 
                 callback.onWordLoaded(dictionaryWord);
             }
@@ -170,7 +171,7 @@ public class WordsRepository implements WordsDataSource {
                         if (mCachedwords == null){
                             mCachedwords = new LinkedHashMap<>();
                         }
-                        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
+                        mCachedwords.put(dictionaryWord.getWord().toLowerCase(Locale.getDefault()), dictionaryWord);
 
                         callback.onWordLoaded(dictionaryWord);
                     }
@@ -195,7 +196,7 @@ public class WordsRepository implements WordsDataSource {
         if (mCachedwords == null){
             mCachedwords = new LinkedHashMap<>();
         }
-        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), dictionaryWord);
+        mCachedwords.put(dictionaryWord.getWord().toLowerCase(Locale.getDefault()), dictionaryWord);
     }
 
     @Override
@@ -211,7 +212,7 @@ public class WordsRepository implements WordsDataSource {
         if (mCachedwords == null){
             mCachedwords = new LinkedHashMap<>();
         }
-        mCachedwords.put(dictionaryWord.getWord().toLowerCase(), activeWord);
+        mCachedwords.put(dictionaryWord.getWord().toLowerCase(Locale.getDefault()), activeWord);
     }
 
     @Override
@@ -233,7 +234,7 @@ public class WordsRepository implements WordsDataSource {
         for (DictionaryWord word : mCachedwords.values()) {
             if (word.isActive()) {
                 word.setActive(false);
-                mCachedwords.put(word.getWord().toLowerCase(), word);
+                mCachedwords.put(word.getWord().toLowerCase(Locale.getDefault()), word);
             }
         }
     }
@@ -296,7 +297,7 @@ public class WordsRepository implements WordsDataSource {
         }
         mCachedwords.clear();
         for (DictionaryWord word: dictionaryWords) {
-            mCachedwords.put(word.getWord().toLowerCase(), word);
+            mCachedwords.put(word.getWord().toLowerCase(Locale.getDefault()), word);
         }
 
         mCacheIsDirty = false;
@@ -313,7 +314,7 @@ public class WordsRepository implements WordsDataSource {
         checkNotNull(word);
 
         if (mCachedwords != null && !mCachedwords.isEmpty()){
-            return mCachedwords.get(word.toLowerCase());
+            return mCachedwords.get(word.toLowerCase(Locale.getDefault()));
         } else {
             return null;
         }

@@ -1,0 +1,23 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<lint>
+    <!-- Ignore everything in the test source set -->
+    <issue id="all">
+        <ignore path="*/test/*" />
+    </issue>
+
+    <issue id="UnusedAttribute">
+        <!-- Ignore networkSecurityConfig in AndroidManifest.xml file -->
+        <ignore regexp="networkSecurityConfig"/>
+    </issue>
+
+    <issue id="GradleDependency">
+        <!-- cannot use the latest version of archLifecycleVersion becz the support lib
+             includes this version if we upgrade this version to 1.1.1 this will create a conflict -->
+        <ignore regexp="android.arch.lifecycle:extensions"/>
+    </issue>
+
+    <issue id="StaticFieldLeak">
+        <ignore regexp="BaseActivity" />
+    </issue>
+
+</lint>

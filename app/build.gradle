@@ -87,6 +87,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        lintConfig file("src/main/res/xml/lint.xml")
+    }
 }
 
 dependencies {
@@ -108,7 +112,7 @@ dependencies {
     // Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     // Room components

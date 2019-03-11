@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/AppThemeCustom"
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
