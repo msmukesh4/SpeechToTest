@@ -1,6 +1,7 @@
 package com.example.speechtotest.ui.splash;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -24,6 +25,24 @@ public class SplashActivity extends BaseActivity {
 
         setUp();
 
+        handleIntent(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        String appLinkAction = intent.getAction();
+        Uri appLinkData = intent.getData();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null){
+//            String recipeId = appLinkData.getLastPathSegment();
+//            Uri appData = Uri.parse("content://com.recipe_app/recipe/").buildUpon()
+//                    .appendPath(recipeId).build();
+//            showRecipe(appData);
+        }
     }
 
     @Override

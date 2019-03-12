@@ -12,5 +12,6 @@
 
     <string name="flavour">main</string>
     <string name="splash_screen">Splash Screen</string>
+    <string name="content_desc_mic">mic</string>
 
 </resources>

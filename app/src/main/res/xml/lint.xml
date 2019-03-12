@@ -20,4 +20,10 @@
         <ignore regexp="BaseActivity" />
     </issue>
 
+    <!-- App indexing needs a .welknown folder which is not possible from S3
+        so ignoring it for now -->
+    <issue id="GoogleAppIndexingWarning">
+        <ignore path="*"/>
+    </issue>
+
 </lint>

@@ -7,7 +7,7 @@
     <!-- cleartextTrafficPermitted="true" will let us use the unencrypted HTTP protocol instead of HTTPS
         if you want force SSL then make this as false -->
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">a.galactio.com</domain>
+        <domain includeSubdomains="true">s3.ap-south-1.amazonaws.com</domain>
     </domain-config>
 
     <!-- you can specify debug-only CAs, which are trusted only when android:debuggable is true,
