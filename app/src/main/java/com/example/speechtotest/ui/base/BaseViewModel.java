@@ -5,6 +5,8 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * Created by mukesh on 04/02/19
  *
@@ -13,13 +15,34 @@ import android.support.annotation.NonNull;
  */
 public abstract class BaseViewModel extends AndroidViewModel {
 
+    private AtomicBoolean isRunningTest;
+
     protected BaseViewModel(@NonNull Application application){
         super(application);
     }
 
     /**
-     * used for viewModel setup
-     * here you can bind activity into viewModel
+     * helper function to check if espresso test is running
+     * @return
      */
-    protected abstract void setUp(BaseActivity activity);
+    public synchronized boolean isRunningTest () {
+        if (null == isRunningTest) {
+            boolean istest;
+
+            try {
+                Class.forName ("android.support.test.espresso.Espresso");
+                istest = true;
+            } catch (ClassNotFoundException e) {
+                istest = false;
+            }
+
+            isRunningTest = new AtomicBoolean(istest);
+        }
+        return isRunningTest.get();
+    }
+
+    /**
+     * used for viewModel setup
+     */
+    protected abstract void setUp();
 }

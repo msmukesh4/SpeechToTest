@@ -29,12 +29,14 @@ public class HomeViewModel extends BaseViewModel {
     // live data variable for registering change in data
     private MutableLiveData<List<DictionaryWord>> keyWords = new MutableLiveData<>();
 
+    // live data for showing the toast
+    private MutableLiveData<Integer> showToast = new MutableLiveData<>();
+
     // @UnUsed
     // this repository has the access all the data of dictionary words
     private DictionaryWordRepository dictionaryWordRepository;
 
     private static final String TAG = HomeViewModel.class.getSimpleName();
-    private BaseActivity activity;
 
     @VisibleForTesting
     private WordsRepository wordsRepository;
@@ -52,11 +54,10 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     @Override
-    protected void setUp(BaseActivity activity) {
+    protected void setUp() {
         Log.e(TAG, "setUp::wordsRepository: "+wordsRepository );
-        this.activity = activity;
 
-        if(!activity.isRunningTest()) {
+        if(isRunningTest()) {
             wordsRepository.refreshWords();
         }
         resetActiveWords();
@@ -78,7 +79,8 @@ public class HomeViewModel extends BaseViewModel {
             @Override
             public void onDataNotAvailable() {
                 Log.e(TAG, "Error while fetching dictionary data: ");
-                activity.showToast(R.string.something_went_wrong);
+                showToast.setValue(R.string.something_went_wrong);
+//                activity.showToast(R.string.something_went_wrong);
             }
         });
     }
@@ -135,21 +137,24 @@ public class HomeViewModel extends BaseViewModel {
                     public void onWordsLoaded(List<DictionaryWord> wordList) {
                         if (wordList != null) {
                             keyWords.setValue(wordList);
-                            activity.showToast(R.string.record_updated);
+//                            activity.showToast(R.string.record_updated);
+                            showToast.setValue(R.string.record_updated);
                         }
                     }
 
                     @Override
                     public void onDataNotAvailable() {
                         Log.e(TAG, "Error while fetching dictionary data: ");
-                        activity.showToast(R.string.something_went_wrong);
+//                        activity.showToast(R.string.something_went_wrong);
+                        showToast.setValue(R.string.something_went_wrong);
                     }
                 });
             }
 
             @Override
             public void onDataNotAvailable() {
-                activity.showToast(R.string.record_404);
+//                activity.showToast(R.string.record_404);
+                showToast.setValue(R.string.record_404);
             }
         });
     }
@@ -172,6 +177,14 @@ public class HomeViewModel extends BaseViewModel {
      */
     protected LiveData<List<DictionaryWord>> getAllWords() {
         return keyWords;
+    }
+
+    /**
+     * get the show toast {@link showToast}
+     * @return : List of words
+     */
+    protected LiveData<Integer> getShowToast() {
+        return showToast;
     }
 
     /**
@@ -210,8 +223,7 @@ public class HomeViewModel extends BaseViewModel {
     @VisibleForTesting
     public void testSaveData(List<DictionaryWord> words){
         this.saveData(words);
-        activity.runOnUiThread(() -> keyWords.setValue(words));
-
+        keyWords.postValue(words);
     }
 
     /**

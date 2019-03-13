@@ -76,7 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     /**
      * helper function for showing Snackbar
-     * @param msg : snackbar Test
+     * @param msg : {@link Snackbar} Test
      */
     @Override
     public void showError(String msg) {

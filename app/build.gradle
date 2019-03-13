@@ -21,7 +21,7 @@ android {
          *     ...
          * </intent-filter>
          */
-//        manifestPlaceholders = [BASE_URL:"a.galactio.com"]
+//       manifestPlaceholders = [BASE_URL:"s3.ap-south-1.amazonaws.com/roku-bidchat"]
     }
 
     signingConfigs {

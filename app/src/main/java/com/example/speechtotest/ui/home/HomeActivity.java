@@ -65,7 +65,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         homeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
 
-        homeViewModel.setUp(this);
+        homeViewModel.setUp();
 
         dictionaryAdapter = new DictionaryAdapter(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -84,15 +84,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void registerObservers() {
 
         // observe the change in dictionary words
-        this.homeViewModel.getAllWords().observe(this, new Observer<List<DictionaryWord>>() {
-            @Override
-            public void onChanged(@Nullable List<DictionaryWord> words) {
-                Log.e(TAG, "onChanged: data changed");
+        this.homeViewModel.getAllWords().observe(this, words -> {
+            Log.e(TAG, "onChanged: data changed");
 
-                // notifying adapter about change in dictionary data
-                dictionaryAdapter.setWords(words);
-            }
+            // notifying adapter about change in dictionary data
+            dictionaryAdapter.setWords(words);
         });
+
+        // observe a live data show toast
+        this.homeViewModel.getShowToast().observe(this, integer -> showToast(integer));
     }
 
 

@@ -17,7 +17,6 @@ import com.example.speechtotest.util.StringUtils;
  */
 public class SpeechViewModel extends BaseViewModel {
 
-    private BaseActivity activity;
 
     private WordsRepository wordsRepository;
 
@@ -28,9 +27,7 @@ public class SpeechViewModel extends BaseViewModel {
     }
 
     @Override
-    protected void setUp(BaseActivity activity) {
-        this.activity = activity;
-    }
+    protected void setUp() { }
 
     /**
      * App specific string replacement
