@@ -59,7 +59,7 @@ android {
         stage {
             initWith debug
         }
-    }
+    }pus
 
     // Specifies one flavor dimension.
     flavorDimensions "version"
